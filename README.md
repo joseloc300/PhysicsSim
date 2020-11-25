@@ -1,2 +1,2 @@
-# NHE-PhysicsSim
-Attempt to simulate some basic physical properties with C++
+# PhysicsSim
+Attempt to simulate some basic physics with C++
