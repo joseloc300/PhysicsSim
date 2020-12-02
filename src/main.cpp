@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-#include "space2d.hpp"
+#include "model/space2d.hpp"
 
 
 void drawSpace2d(sf::RenderWindow &window, Space2d &space);
