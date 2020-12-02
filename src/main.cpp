@@ -8,11 +8,8 @@ void drawSpace2d(sf::RenderWindow &window, Space2d &space);
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 600), "NHE Physics Sim");
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(0);
     
-    Space2d defaultSpace = Space2d(50, 50);
-    defaultSpace.turnOnGrid(2.0);
-
     sf::Vector2i mousePos;
 
     while (window.isOpen())
@@ -36,7 +33,6 @@ int main() {
                     sf::Vector2i difMousePos = newMousePos - mousePos;
 
                     std::cout << "Mouse movement: " << difMousePos.x << ", " << difMousePos.y << std::endl;
-                    defaultSpace.movePivot(difMousePos.x, difMousePos.y);
                 }
 
                 mousePos = sf::Mouse::getPosition(window);
@@ -48,7 +44,7 @@ int main() {
         window.clear();
         
         //drawFunctions
-        drawSpace2d(window, defaultSpace);
+        //drawSpace2d(window, defaultSpace);
 
         window.display();
     }
@@ -56,9 +52,10 @@ int main() {
     return 0;
 }
 
+/*
 void drawSpace2d(sf::RenderWindow &window, Space2d &space) {
     sf::RenderTexture renderTexture;
-    if (!renderTexture.create(space.width, space.height))
+    if (!renderTexture.create(space.width * space.pixelsPerMeter, space.height * space.pixelsPerMeter))
     {
         // error...
     }
@@ -67,21 +64,21 @@ void drawSpace2d(sf::RenderWindow &window, Space2d &space) {
     int nLinesH = space.height / space.gridSize;
     int nLinesV = space.width / space.gridSize;
 
-    for(int i = 0; i < nLinesH; i++) {
+    for(int i = 0; i <= nLinesH; i++) {
         sf::Vertex line[] =
         {
-            sf::Vertex(sf::Vector2f(0, i * space.gridSize)),
-            sf::Vertex(sf::Vector2f(space.height, i * space.gridSize))
+            sf::Vertex(sf::Vector2f(0, i * space.gridSize * space.pixelsPerMeter)),
+            sf::Vertex(sf::Vector2f(space.height * space.pixelsPerMeter, i * space.gridSize * space.pixelsPerMeter))
         };
 
         renderTexture.draw(line, 2, sf::Lines);
     }
 
-    for(int i = 0; i < nLinesV; i++) {
+    for(int i = 0; i <= nLinesV; i++) {
         sf::Vertex line[] =
         {
-            sf::Vertex(sf::Vector2f(i * space.gridSize, 0)),
-            sf::Vertex(sf::Vector2f(i * space.gridSize, space.width))
+            sf::Vertex(sf::Vector2f(i * space.gridSize * space.pixelsPerMeter, 0)),
+            sf::Vertex(sf::Vector2f(i * space.gridSize * space.pixelsPerMeter, space.width * space.pixelsPerMeter))
         };
 
         renderTexture.draw(line, 2, sf::Lines);
@@ -95,3 +92,4 @@ void drawSpace2d(sf::RenderWindow &window, Space2d &space) {
     sprite.setPosition(space.pivotX, space.pivotY);
     window.draw(sprite);
 }
+*/
